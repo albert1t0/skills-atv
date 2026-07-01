@@ -295,6 +295,10 @@ Item 2
 </split>
 ```
 
+### Important: `<split>` does not render bullet lists
+
+Bullet lists (`-`, `+`) do **not** render inside `<split>` — the bullets simply disappear. If you want a two-column layout and any column contains bullets, do **not** use `<split>`. Use two side-by-side `<grid>` blocks instead (see the "Two columns with bullets" pattern in section 8).
+
 ---
 
 ## 8. Layout: Grid component
@@ -329,6 +333,41 @@ Sidebar
 Footer bar
 </grid>
 ```
+
+### Two columns with bullets (use instead of `<split>`)
+
+When you want a two-column layout and one (or both) columns contain bullets, use two side-by-side `<grid>` blocks — **not** `<split>`, because split does not render bullets.
+
+Two rules make this work:
+
+1. Add an empty `<p></p>` right after the heading, and wrap both grids in a single `<p>…</p>`. Without this the grid is positioned over the title and the layout ends up overlapped.
+2. Give the left grid a positive `drop` x (measured from the left edge) and the right grid a negative `drop` x (measured from the right edge). Keep the `drag` size and `drop` y equal on both so the columns line up.
+
+```
+## Sistemas, licencias y seguridad
+<p></p>
+<p>
+<grid drag="46 64" drop="2 26">
+
+**Continuidad operativa**
+- FastTest Web y diagramación
+- OpenProject, Shiny Server, NocoDB
+- Renovación de licencias y accesos
+
+</grid>
+
+<grid drag="46 64" drop="-2 26">
+
+**Seguridad**
+- Respaldos de información sensible
+- Fortalecimiento de medidas
+- Gestión administrativa interna
+
+</grid>
+</p>
+```
+
+Keep a blank line after each `<grid ...>` opening tag and before each `</grid>` closing tag so the Markdown (bold labels and bullets) inside renders correctly.
 
 ### Named positions
 Available: center, top, bottom, left, right, topleft, topright, bottomleft, bottomright
@@ -658,6 +697,9 @@ note: Transition to new section. Brief overview of what's coming.
 ```
 
 ### Two-column content
+
+Use `<split>` only when the columns are prose/images. If either column has bullet lists, use the "Two columns with bullets" grid pattern in section 8 instead — `<split>` will not render the bullets.
+
 ```
 ## Topic name
 

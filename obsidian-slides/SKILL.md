@@ -19,7 +19,7 @@ Before writing any slides, read `references/syntax-reference.md` in this skill f
 
 4. **Write speaker notes.** Every content slide should have a `note:` section with what the presenter should say or emphasize. Speaker notes are the expanded explanation that doesn't belong on the slide itself.
 
-5. **Apply layouts.** Use `<split>` and `<grid>` components where content benefits from multi-column or positioned layout. Use them sparingly — not every slide needs a complex layout.
+5. **Apply layouts.** Use `<split>` and `<grid>` components where content benefits from multi-column or positioned layout. Use them sparingly — not every slide needs a complex layout. Note: `<split>` does **not** render bullet lists; for a two-column layout where a column has bullets, use two side-by-side `<grid>` blocks instead, with an empty `<p></p>` after the heading (and the grids wrapped in `<p>…</p>`) so the layout doesn't overlap the title. See the "Two columns with bullets" pattern in the reference.
 
 6. **Add visual enhancements.** Use fragmented lists (`+` for unordered, `)` for ordered) when content should appear incrementally. Use slide backgrounds for section dividers or emphasis slides. Use element annotations for styling individual elements.
 
@@ -86,6 +86,7 @@ defaultTemplate: null # template applied to all slides
 - **Images (standard markdown):** `![alt](url)` — use for external URLs
 - **Split layout:** `<split even gap="1">` ... `</split>` (children separated by blank lines)
 - **Grid layout:** `<grid drag="width height" drop="x y">` ... `</grid>`
+- **Split vs grid with bullets:** `<split>` does **not** render bullet lists. For two columns where a column has bullets, use two `<grid>` blocks (positive `drop` x for the left column, negative for the right) and add an empty `<p></p>` after the heading, wrapping the grids in `<p>…</p>`, so the layout doesn't overlap the title.
 - **Block comments (for templates):** `::: blockname` ... `:::`
 
 For complete syntax including grid attributes, animation, filters, opacity, rotation, padding, alignment, and all layout options, read `references/syntax-reference.md`.
